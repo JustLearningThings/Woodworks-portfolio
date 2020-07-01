@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Roboto:400,700&display=swap&subset=cyrillic,cyrillic-ext,latin-ext');
+
+html, body {
+    height: 100%;
+}
+
+div {
+    margin: 1%;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to top right, #4d91ff , #ef4dff);
+} 
+
+label, #submit-btn, #error-box {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+#header-h2, input {
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+textarea {
+    resize: none;
+    border: 1px solid black;
+    outline: none;
+}
+
+label {
+    text-align: center;
+}
+
+#header-h2 {
+    margin: 0;
+    font-size: 2em;
+    letter-spacing: .075em;
+    margin: 5% auto;
+}
+
+main {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#form-container {
+    width: 70%;
+    max-width: 550px;
+    overflow: hidden;
+    box-shadow: 2px 3px 10px black;
+    border-radius: 2%;
+}
+
+main form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#input-section {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#input-section div {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#input-section div input:not(:last-child) {
+    margin: 0;
+    width: 100%;
+    max-width: 300px;
+    border: 2px solid black;
+}
+
+.title-input input, .type-input input {
+    min-width: 230px;
+    width: 80%;
+}
+
+#input-section label {
+    padding: 10px;
+    font-size: 1.1em;
+}
+
+.title-input label {
+    background-color: #242323;
+    color: white;
+    border: 1px solid #242323;
+}
+
+#type-input label {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 0;
+    font-size: .9em;
+    font-weight: 400;
+    flex-basis: 100%;
+}
+
+#input-section #type-input {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.description-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.description-input label {
+    margin-bottom: 7px;
+    font-size: 1.22em;
+    border: none;
+    background: none;
+    color: black;
+}
+
+.description-input textarea {
+    width: 80%;
+    min-width: 250px;
+    max-width: 365px;
+    min-height: 110px;
+    font-size: 1.05em;
+}
+
+textarea, input {
+    padding: 12px;
+}
+
+input:focus {
+    border: none;
+    outline-width: 10px;
+    padding: 13.25px;
+}
+
+#images-input {
+    width: .1px;
+    height: .1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+    position: absolute;
+}
+
+#images-input + label {
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    color: white;
+    background-color: white;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    max-width: 70px;
+    font-size: 1.2em;
+    padding: 12px;
+    width: 80%;
+    transition: background-color .2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 105px;
+}
+
+#images-input + label i {
+    width: 50px;
+    margin-right: 10px;
+    padding: 15px;
+    font-size: 3em;
+}
+
+#images-input + label span {
+    color: #f53838;
+    margin-top: 3px;
+    font-size: .85em;
+    max-width: 150px;
+    overflow: hidden;
+}
+
+#images-input:focus + label,
+#images-input + label:hover {
+    opacity: 1;
+}
+
+#images-input:focus + label {
+    outline: 1px solid #000;
+    outline: -webkit-focus-ring-color auto 5px;
+    outline: -o-focus-ring-color auto 5px;
+}
+
+#images-input + label i,
+#images-input + label span {
+    color: #2b2b2b;
+}
+
+#btn-section {
+    width: 100%;
+    height: 100%;
+    max-height: 100px;
+    flex-basis: 23%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#submit-btn {
+    background: linear-gradient(to right, #ef4dff , #4d91ff);
+    border: none;
+    color: white;
+    border-radius: 20px;
+    width: 75%;
+    font-size: 1.2em;
+    font-weight: bold;
+    opacity: .9;
+    transition: opacity, .2s, transform, .1s;
+    outline: none;
+    margin-bottom: 3%;
+}
+
+#submit-btn:hover, #submit-btn:focus {
+    opacity: 1;
+    transform: scale(1.01);
+    background-color: #d92727;
+}
+
+/* for error handling */
+main #input-section #error-box {
+    display: none;
+    text-align: center;
+    color: white;
+    margin: 1%;
+}
+
+#error-box ul {
+    width: 100%;
+    margin: 10px auto;
+}
+
+#error-box li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 10px;
+    font-size: .8em;
+    padding: 5px;
+}
+
+.error-div {
+    background-color: #f04141;
+    opacity: .8;
+    border: 2px solid #bf0a0a;
+    border-radius: 5px;
+}
+
+.error-input {
+    background-color: #f04141;
+    border: 1px solid #bf0a0a;
+}
+
+/* styles for unlogged users */
+#redirect-main {
+    width: 100%;
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+#redirect-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#redirect-link {
+    text-decoration: none;
+}
+
+
+#input-section #input-romanian,
+#input-section #input-russian {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#input-section #input-romanian {
+    margin-top: 5%;
+}
+
+#input-section #input-russian {
+    margin-bottom: 5%;
+}
+
+#input-section .dropdown-content {
+    display: none;
+    flex-direction: column;
+}
+
+.dropdown-text {
+    display: block;
+    font-size: 1.3em;
+    margin: 5px auto;
+    text-decoration: underline;
+}
+
+.dropdown-text:hover {
+    text-decoration: none;
+    transform: scale(1.01);
+}
+
+#input-section .visible-dropdown {
+    display: flex;
+}
+
+#file-input-image-list {
+    text-decoration: none;
+    list-style: none;
+}

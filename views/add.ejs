@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge; chrome=1">
+    <title>WoodWorks</title>
+    <script src="https://kit.fontawesome.com/246d89751b.js" crossorigin="anonymous"></script>
+    <!-- <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/tools-hand-drawn-icons/64/tools_44-512.png"> -->
+    <link rel="preconnect" href="https://cdn2.iconfinder.com/data/icons/tools-hand-drawn-icons/64/tools_44-512.png">
+    <link rel="stylesheet" type="text/css" href="/public/styles/add.css">
+</head>
+
+<body>
+
+<% if(su) { %>
+<main id="container">
+    <div id="form-container">
+        <form action="/api/works" method="POST" enctype="multipart/form-data" id="add-form">
+            <section id="input-section">
+                <div id="header">
+                    <h2 id="header-h2">Postează o lucrare</h2>
+                </div>
+                <div id="error-box" class="error-div"></div>
+
+                <div id="input-romanian" class="dropdown">
+                    <h2 id="dropdown-romanian" class="dropdown-text">
+                        Conținutul în română...
+                    </h2>
+                    <div id="dropdown-content-romanian" class="dropdown-content">
+                        <div class="title-input">
+                            <label for="title">Titlu</label>
+                            <input type="text" name="title" id="title" required autocomplete="off" autofocus placeholder="titlu">
+                        </div>
+                        <div class="description-input">
+                            <label for="description">Descriere</label>
+                            <textarea name="description" id="description" placeholder="descriere opțională" maxlength="500"></textarea>
+                            <span class="description-help"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="input-russian" class="dropdown">
+                    <h2 id="dropdown-russian" class="dropdown-text">
+                        Содержание на русском...
+                    </h2>
+                    <div id="dropdown-content-russian" class="dropdown-content">
+                        <div class="title-input">
+                            <label for="title">Название</label>
+                            <input type="text" name="title_ru" id="title" required autocomplete="off" autofocus placeholder="название">
+                        </div>
+                        <div class="description-input">
+                            <label for="description">Описание</label>
+                            <textarea name="description_ru" id="description" placeholder="необязательное описание" maxlength="500"></textarea>
+                            <span class="description-help"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="title-input">
+                    <label for="title">Titlu</label>
+                    <input type="text" name="title" id="title" required autocomplete="off" autofocus placeholder="titlu">
+                </div> -->
+                <!-- <div class="title-input">
+                    <label for="title">Название</label>
+                    <input type="text" name="title_ru" id="title" required autocomplete="off" autofocus placeholder="название">
+                </div> -->
+                <div id="type-input">
+                    <div class="type-input-div">
+                        <input type="radio" id="scari" name="type" value="scari" required>
+                        <label for="scari">Scari</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="dulapuri" name="type" value="dulapuri">
+                        <label for="dulapuri">Dulapuri</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="scaune" name="type" value="scaune">
+                        <label for="scaune">Scaune</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="usi" name="type" value="usi">
+                        <label for="usi">Usi</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="altele" name="type" value="altele">
+                        <label for="altele">Altele</label>
+                    </div>
+
+                    <!-- <label for="type">Type</label>
+                    <input type="text" name="type" id="type" required autocomplete="off" placeholder="type"> -->
+                </div>
+                <!-- <div class="description-input">
+                    <label for="description">Descriere</label>
+                    <textarea name="description" id="description" placeholder="descriere opțională" maxlength="500"></textarea>
+                    <span class="description-help"></span>
+                </div> -->
+                <!-- <div class="description-input">
+                    <label for="description">Описание</label>
+                    <textarea name="description_ru" id="description" placeholder="необязательное описание" maxlength="500"></textarea>
+                    <span class="description-help"></span>
+                </div> -->
+                <div id="file-input">
+                    <!-- <div id="input-btn"> -->
+                        <input type="file" name="images" id="images-input" data-multiple-caption="{count} files selected" multiple>
+                        <label for="images-input">
+                            <i class="fas fa-file-upload"></i>
+                            <span>Alege un file...</span>
+                        </label>
+                    <!-- </div> -->
+                </div>
+                <div id="btn-section">
+                    <input type="submit" value="Trimite" id="submit-btn">
+                </div>
+            </section>
+            <!-- <section id="btn-section">
+                <input type="submit" value="Submit" id="submit-btn">
+            </section> -->
+        </form>
+    </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/public/scripts/add.js"></script>
+
+<% } else { %>
+    <main id="redirect-main">
+        <section id="redirect-section">
+            <p id="redirect-message">You are not an administrator of this website.</p>
+            <span id="redirect-message-span">
+                <a href="/su" id="redirect-link">Click here</a>
+                to obtain permission.
+            </span>
+        </section>
+    </main>
+<% } %>
+
+<%- include ('./partials/footer.ejs') %>

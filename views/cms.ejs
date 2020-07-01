@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge; chrome=1">
+    <title>WoodWorks</title>
+    <script src="https://kit.fontawesome.com/246d89751b.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/tools-hand-drawn-icons/64/tools_44-512.png">
+    <link rel="stylesheet" type="text/css" href="/public/styles/cms.css">
+</head>
+
+<body>
+<% if (su) { %>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<main>
+    <section id="heading">
+        <h1 id="heading-header">
+            Gestionează conținutul
+        </h1>
+    </section>
+    <section id="content-list">
+        <table id="content-list-table">
+            <tr>
+                <th>Lucrare</th>
+                <th>Imagini</th>
+                <th>Descriere</th>
+                <th>Vizualizări</th>
+                <th>Acțiuni</th>
+            </tr>
+        </table>
+        <button id="load-content-btn">Mai încarcă</button>
+    </section>
+</main>
+
+<div id="modal">
+    <div id="modal-content">
+        <span id="close">&times</span>
+        <p id="modal-text">
+            Această acțiune nu poate fi recuperată. Ești sigur ?
+        </p>
+        <button id="modal-btn">Șterge</button>
+    </div>
+</div>
+
+<script src="../public/scripts/cms.js"></script>
+
+<% } else { %>
+<main id="redirect-main">
+    <section id="redirect-section">
+        <p id="redirect-message">You are not an administrator of this website.</p>
+        <span id="redirect-message-span">
+            <a href="/su" id="redirect-link">Click here</a>
+            to obtain permission.
+        </span>
+    </section>
+</main>
+<% } %>
+
+<%- include ('./partials/footer.ejs') %>

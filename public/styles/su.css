@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+body {
+    margin: 0;
+    background: linear-gradient(to bottom right, #ED4264, #FFEDBC);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    min-width: 25%;
+    min-height: 15%;
+    justify-content: center;
+    padding: 10px;
+    /* border: 1px solid black; */
+    background-color: snow;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px black;
+}
+
+#btn, #pass {
+    /* margin: 12px auto; */
+    padding: 12px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#pass {
+    width: 90%;
+    margin: 10px auto;
+    outline: steelblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+#password {
+    border: none;
+    outline: none;
+    width: 93%;
+}
+
+#icon {
+    width: 7%;
+}
+
+#btn {
+    margin: 10px auto;
+    cursor: pointer;
+    outline: none;
+    width: 90%;
+    background: linear-gradient(to top right, #FFEDBC, #ED4264);
+    border-radius: 8px;
+    box-shadow: 1px 1px 2px black;
+    border: none;
+    font-size: 1.15em;
+    color: white;
+}
+
+#btn:focus {
+    transform: scale(.98);
+    box-shadow:  1px 1px 1px black;
+}
+
+.invalid-pass {
+    border: 2px solid red;
+    opacity: .6;
+}
+
+.valid-pass {
+    border: 1px solid gainsboro;
+}

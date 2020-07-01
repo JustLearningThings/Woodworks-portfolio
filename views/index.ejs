@@ -1,0 +1,111 @@
+<%- include ('./partials/header.ejs') %>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://kit.fontawesome.com/246d89751b.js" crossorigin="anonymous" defer></script>
+
+<!-- for accessing ejs variable in index.js -->
+<div id="ejs" class="hidden-content" tabindex="-1"><% if (su) { %>su<% } %></div>
+
+<div id="modal">
+    <span id="close">&times</span>
+    <div id="modal-content">
+        <div id="slider">
+        </div>
+        <div id="modal-info">
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+</div>
+
+<main>
+    <section id="info">
+        <div id="info-container">
+            <h1 id="info-header">
+                <span lang="ro">Lucrări în lemn</span>
+                <span lang="ru">Изделия из дерева</span>
+            </h1>
+            <ul id="info-list">
+                <li lang="ro">Scări</li>
+                <li lang="ro">Dulapuri</li>
+                <li lang="ro">Scaune</li>
+                <li lang="ro">Uși</li>
+                <li lang="ro">Altele</li>
+                <li lang="ru">Лестницы</li>
+                <li lang="ru">Гардеробы</li>
+                <li lang="ru">Стулья</li>
+                <li lang="ru">Двери</li>
+                <li lang="ru">Другое</li>
+            </ul>
+            <button id="works-btn">
+                <span lang="ro">Arată lucrări</span>
+                <span lang="ru">Показать работы</span>
+            </button>
+        </div>
+        <!-- <a href="#footer"> -->
+            <div id="contacts" href="#footer">
+                <i class="fas fa-phone" id="phone"></i>
+            </div>
+        <!-- </a> -->
+        <div id="languages">
+            <div id="languages-language-div">
+                <p id="languages-language">Română</p>
+                <i id="languages-language-icon" class="fas fa-caret-down"></i>
+            </div>
+            <ul id="language-dropdown-content" class="hidden-content">
+                <li class="language" id="romanian_language">Română</li>
+                <li class="language" id="russian_language">Русский</li>
+            </ul>
+        </div>
+    </section>
+    <footer class="hidden-content">
+        <div id="footer-left">
+            <i class="fab fa-facebook-square" id="fb"></i>
+            <span class="contacts-phone">069xxxxxx</span>
+        </div>
+        <span id="footer-close">&times;</span>
+    </footer>
+    <section id="main-container" class="hidden-content">
+        <h2 id="main-header">
+            <span lang="ro">Lucrări realizate</span>
+            <span lang="ru">Выполненные работы</span>
+        </h2>
+        <div id="filter-dropdown">
+            <button id="dropdown-btn">
+                <span lang="ro">Filtru</span>
+                <span lang="ru">Фильтровать</span>
+            </button>
+            <div class="dropdown-content">
+                <p id="filter1">
+                    <span lang="ro">Toate</span>
+                    <span lang="ru">Все</span>
+                </p>
+                <p id="filter2">
+                    <span lang="ro">Scări</span>
+                    <span lang="ru">Лестницы</span>
+                </p>
+                <p id="filter3">
+                    <span lang="ro">Dulapuri</span>
+                    <span lang="ru">Гардеробы</span>
+                </p>
+                <p id="filter4">
+                    <span lang="ro">Scaune</span>
+                    <span lang="ru">Стулья</span>
+                </p>
+                <p id="filter5">
+                    <span lang="ro">Uși</span>
+                    <span lang="ru">Двери</span>
+                </p>
+                <p id="filter6">
+                    <span lang="ro">Altele</span>
+                    <span lang="ru">Другое</span>
+                </p>
+            </div>
+        </div>
+        <hr id="main-hr">
+        <div id="thumbnails">
+        </div>
+    </section>
+</main>
+
+<script src="../public/scripts/index.js"></script>
+<%- include ('./partials/footer.ejs') %>

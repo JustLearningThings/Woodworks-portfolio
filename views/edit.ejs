@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge; chrome=1">
+    <title>WoodWorks</title>
+    <script src="https://kit.fontawesome.com/246d89751b.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="https://cdn2.iconfinder.com/data/icons/tools-hand-drawn-icons/64/tools_44-512.png">
+    <link rel="stylesheet" type="text/css" href="/public/styles/edit.css">
+</head>
+
+<body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<% if(su) { %>
+<main id="container">
+    <div id="form-container">
+        <form action="/api/works" method="POST" enctype="multipart/form-data" id="edit-form">
+            <section id="input-section">
+                <div id="header">
+                    <h2 id="header-h2">Editează o lucrare</h2>
+                </div>
+                <div id="error-box" class="error-div"></div>
+
+                <div id="input-romanian" class="dropdown">
+                    <h2 id="dropdown-romanian" class="dropdown-text">
+                        Conținutul în română...
+                    </h2>
+                    <div id="dropdown-content-romanian" class="dropdown-content">
+                        <div class="title-input">
+                            <label for="title">Titlu</label>
+                            <input type="text" name="title" id="title" required autocomplete="off" autofocus
+                                placeholder="titlu">
+                        </div>
+                        <div class="description-input">
+                            <label for="description">Descriere</label>
+                            <textarea name="description" id="description" placeholder="descriere opțională"
+                                maxlength="500"></textarea>
+                            <span class="description-help"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="input-russian" class="dropdown">
+                    <h2 id="dropdown-russian" class="dropdown-text">
+                        Содержание на русском...
+                    </h2>
+                    <div id="dropdown-content-russian" class="dropdown-content">
+                        <div class="title-input">
+                            <label for="title">Название</label>
+                            <input type="text" name="title_ru" id="title_ru" required autocomplete="off" autofocus
+                                placeholder="название">
+                        </div>
+                        <div class="description-input">
+                            <label for="description">Описание</label>
+                            <textarea name="description_ru" id="description_ru" placeholder="необязательное описание"
+                                maxlength="500"></textarea>
+                            <span class="description-help"></span>
+                        </div>
+                    </div>
+                </div>
+                <div id="type-input">
+                    <div class="type-input-div">
+                        <input type="radio" id="scari" name="type" value="scari" required>
+                        <label for="scari">Scari</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="dulapuri" name="type" value="dulapuri">
+                        <label for="dulapuri">Dulapuri</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="scaune" name="type" value="scaune">
+                        <label for="scaune">Scaune</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="usi" name="type" value="usi">
+                        <label for="usi">Usi</label>
+                    </div>
+                    <div class="type-input-div">
+                        <input type="radio" id="altele" name="type" value="altele">
+                        <label for="altele">Altele</label>
+                    </div>
+                </div>
+                <div id="file-input">
+                    <input type="file" name="images" id="images-input" data-multiple-caption="{count} files selected"
+                        multiple>
+                    <label for="images-input">
+                        <i class="fas fa-file-upload"></i>
+                        <span>Alege un file...</span>
+                    </label>
+                    <ul id="file-input-image-list">
+                        <li>Imagini: </li>
+                    </ul>
+                </div>
+                <div id="btn-section">
+                    <input type="submit" value="Trimite" id="submit-btn">
+                </div>
+            </section>
+        </form>
+    </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<!-- using this type of script because you can't pass an ejs variable to a js file -->
+<script>
+    // get the work data and append it to inputs on this page
+    var titleRoInput = document.getElementById('title');
+    var descriptionRoInput = document.getElementById('description');
+    var titleRuInput = document.getElementById('title_ru');
+    var descriptionRuInput = document.getElementById('description_ru');
+    var typeInputs = [];
+    var imagesInput;
+    var imageList = document.getElementById('file-input-image-list');
+
+    document.querySelectorAll('.type-input-div [type=radio]').forEach(input => { typeInputs.push(input) });
+
+    function createImageForList(image) {
+        let li = document.createElement('LI');
+        let link = document.createElement('A');
+
+        link.textContent = image.fileName;
+        link.href = `/${image.imageURL}`;
+
+        // setting attributes required for correct edit functioning of the form
+        // li.setAttribute('image-filename', image.fileName);
+        // li.setAttribute('image-work-id', image.workId);
+        li.setAttribute('image-image-url', image.imageURL);
+        li.classList.add('image-li'); // class just as a selector
+
+        li.appendChild(link);
+        imageList.appendChild(li);
+    }
+
+    axios.get('/api/works/<%- workId %>?filter=false')
+    .then(res => {
+        console.log(res.data);
+        titleRoInput.value = res.data.textData.ro.title;
+        descriptionRoInput.value = res.data.textData.ro.description;
+        titleRuInput.value = res.data.textData.ru.title;
+        descriptionRuInput.value = res.data.textData.ru.description;
+        
+        typeInputs.forEach(input => {
+            if(res.data.type === input.value)
+                input.checked = true;
+        });
+
+        res.data.images.forEach(image => { createImageForList(image) });
+    });
+
+    var form = document.getElementById('edit-form');
+
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        if (errorBox.children) removeMessages();
+
+        var data = new FormData(form);
+
+        axios.put('/api/works/<%- workId %>', data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+        .then(res => {
+            alert('Editat');
+            if (res.status !== 201) window.location.replace('/'); //should handle errors
+            else {
+                if (res.data.status === 'error' && res.data.message) {
+                    createErrorMessages(res.data.message)
+                }
+                window.location.replace('/');
+            }
+            return false;
+        })
+        .catch(err => createErrorMessages(err.response.data.message));
+    });
+    // });
+</script>
+
+<script src="../public/scripts/edit.js"></script>
+
+<% } else { %>
+<main id="redirect-main">
+    <section id="redirect-section">
+        <p id="redirect-message">You are not an administrator of this website.</p>
+        <span id="redirect-message-span">
+            <a href="/su" id="redirect-link">Click here</a>
+            to obtain permission.
+        </span>
+    </section>
+</main>
+<% } %>
+
+<%- include ('./partials/footer.ejs') %>
