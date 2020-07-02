@@ -37,7 +37,7 @@ app.use(session({
         maxAge: false,
         httpOnly: true,
         sameSite: true,
-        secure: true
+        //secure: true
     },
     store: new MongoStore({
         mongooseConnection: mongoose.connection,
