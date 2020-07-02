@@ -10,11 +10,6 @@ const createError500 = (message='Internal server error') => {
     return err;
 };
 
-// const sendErrorJSON = (err=createError500(), res) => {
-//     if(!err.message) err.message = 'Internal server error'; // not necessary tho
-//     res.status(err.statusCode).json(err.message);
-// };
-
 module.exports = {
     createError,
     createError500,

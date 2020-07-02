@@ -7,6 +7,15 @@ const sharp = require('sharp');
 
 const { body, validationResult } = require('express-validator');
 
+// Authorization
+const isAdmin = (req, res, next) => {
+    if (req.session.su === true) next();
+    else return res.status(401).json({
+        status: 'unauthorized',
+        message: 'you are not authorized for this action'
+    });
+};
+
 // Validation
 const validationMiddlewares = [
     body('title').not().isEmpty().withMessage('Empty title').trim().escape(),
@@ -418,6 +427,7 @@ const deleteWorkImagesAll = function (req, res, next) {
 }
 
 // exporting module
+exports.isAdmin = isAdmin;
 exports.validationMiddlewares = validationMiddlewares;
 exports.validationMiddlewaresPUT = validationMiddlewaresPUT;
 exports.validateWork = validateWork;

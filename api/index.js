@@ -28,6 +28,7 @@ let upload = multer({
 
 // Routes
 app.post('/works',
+    helpers.isAdmin,
     upload.array('images'),
     (req, res, next) => {
         if(req.fileValidationError) {
@@ -97,13 +98,14 @@ app.get('/works/random', (req, res, next) => {
     }
 });
 
-app.delete('/works/:id', (req, res, next) => {
+app.delete('/works/:id', helpers.isAdmin, (req, res, next) => {
     if (req.query.imgs && req.query.imgs[0] === '*') helpers.deleteWorkImagesAll(req, res, next);
     else if(req.query.imgs) helpers.deleteWorkImages(req, res, next);
     else helpers.handleDelete(req, res, next);
 });
 
-app.put('/works/:id', 
+app.put('/works/:id',
+    helpers.isAdmin,
     upload.array('images'),
     (req, res, next) => {
         if (Object.keys(req.body).length === 0 && req.body.constructor === Object) next(handleError.createError500('req.body is undefined at PUT'));

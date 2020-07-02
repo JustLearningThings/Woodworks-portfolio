@@ -19,22 +19,14 @@ const SU_PASS = process.env.SU_PASS;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 // connect DB
-// mongoose.connect('mongodb://localhost:27017/works', {useNewUrlParser: true, useUnifiedTopology: true})
-// .catch(err => console.log(err));
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).catch(err => console.log(err));
 
 app.use(cookieParser());
 app.use(helmet({
     frameguard: { action: 'deny' }
 }));
-app.set('view engine', 'ejs')
-app.use('/api', api);
-app.use(bodyParser.json()); //for parsing application/json
-app.use(bodyParser.urlencoded({extended: true}));
-app.use('/public', express.static('public'));
-app.use('/', express.static('public')); // made so to place robots.txt
-app.use('/views', express.static);
 app.use(compression());
+app.set('view engine', 'ejs')
 
 app.use(session({
     secret: SESSION_SECRET,
@@ -45,13 +37,21 @@ app.use(session({
         maxAge: false,
         httpOnly: true,
         sameSite: true,
-        //secure: true
+        secure: true
     },
     store: new MongoStore({
         mongooseConnection: mongoose.connection,
         collection: 'sessions',
     })
 }));
+
+app.use('/api', api);
+app.use(bodyParser.json()); //for parsing application/json
+app.use(bodyParser.urlencoded({extended: true}));
+app.use('/public', express.static('public'));
+app.use('/', express.static('public')); // made so to place robots.txt
+app.use('/views', express.static);
+
 
 // clear the cookie for infinite scroll for all routes
 app.use((req, res, next) => {
@@ -62,7 +62,6 @@ app.use((req, res, next) => {
 
 // error handling middleware
 app.use((err, req, res, next) => {
-    console.log('>'+err);
     if(!err.statusCode) { 
     err.statusCode = 500;
     if(!err.message) err.message = 'Internal server error';
