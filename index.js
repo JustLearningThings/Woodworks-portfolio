@@ -13,7 +13,7 @@ const upload = multer();
 
 const cookieParser = require('cookie-parser');
 
-require('dotenv').config();
+//require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const SU_PASS = process.env.SU_PASS;
 const SESSION_SECRET = process.env.SESSION_SECRET;
