@@ -136,6 +136,7 @@ li {
     transition: .3s;
     border-radius: 5px;
     min-height: 100px;
+    max-height: 300px;
 }
 
 .lazy-thumbnail {
@@ -151,6 +152,7 @@ li {
 .thumbnail-img {
     width: 100%;
     margin: 0;
+    max-height: 250px;
 }
 
 .thumbnail-title {
@@ -652,6 +654,12 @@ footer * {
     #works-btn {
         font-size: 1.75rem;
     }
+    .thumbnail {
+        max-height: 175px;
+    }
+    .thumbnail-img {
+        max-height: 125px;
+    }
 }
 
 
@@ -668,6 +676,10 @@ footer * {
     }
     .thumbnail {
         flex-basis: 28.3%;
+        max-height: 200px;
+    }
+    .thumbnail-img {
+        max-height: 150px;
     }
     #footer-left {
         font-size: .9em;
@@ -734,6 +746,12 @@ footer * {
         font-size: 1.25em;
         flex-basis: 100%;
         margin: 1.5% auto;
+    }
+    .thumbnail {
+        max-height: 150px;
+    }
+    .thumbnail-img {
+        max-height: 100px;
     }
     #works-btn {
         font-size: 1rem;
