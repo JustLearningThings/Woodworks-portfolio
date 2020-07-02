@@ -19,9 +19,9 @@ const SU_PASS = process.env.SU_PASS;
 const SESSION_SECRET = process.env.SESSION_SECRET;
 
 // connect DB
-mongoose.connect('mongodb://localhost:27017/works', {useNewUrlParser: true, useUnifiedTopology: true})
-.catch(err => console.log(err));
-
+// mongoose.connect('mongodb://localhost:27017/works', {useNewUrlParser: true, useUnifiedTopology: true})
+// .catch(err => console.log(err));
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true}).catch(err => console.log(err));
 
 app.use(cookieParser());
 app.use(helmet({

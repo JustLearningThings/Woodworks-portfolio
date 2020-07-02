@@ -1,24 +1,5 @@
 let mongoose = require('mongoose');
 
-// let workSchema = new mongoose.Schema({
-//     title: {
-//         type: String,
-//         required: true,
-//         trim: true
-//     },
-//     uploadDate: {type: Date, default: Date.now},
-//     type: {
-//         type: String,
-//         required: true,
-//         trim: true
-//     },
-//     images: [{type: mongoose.Schema.Types.ObjectId, ref: 'Image'}],
-//     description: {
-//         type: String,
-//         trim: true
-//     }
-// });
-
 let workSchema = new mongoose.Schema({
     uploadDate: {
         type: Date,

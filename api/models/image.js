@@ -1,7 +1,6 @@
 let mongoose = require('mongoose');
 
 let imageSchema = new mongoose.Schema({
-    //img: { data: Buffer, contentType: String },
     imageURL: {
         type: String,
         required: true

@@ -6,7 +6,6 @@ const fs = require('fs');
 const sharp = require('sharp');
 
 const { body, validationResult } = require('express-validator');
-const Work = require('../models/work.js');
 
 // Validation
 const validationMiddlewares = [
