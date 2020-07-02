@@ -5,17 +5,15 @@ const handleError = require('./helpers/error.js');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: './public/uploads',
-    filename: (req, file, cb) => {
-        cb(null, `${file.originalname.toLocaleLowerCase().split(' ').join('-')}`);
-    }
+    filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname.toLocaleLowerCase()}`)
 });
 
 let upload = multer({
     storage: storage,
-    fileFilter: (req, file, cb) => { 
+    fileFilter: (req, file, cb) => {
         const acceptedMimes = ['image/png', 'image/jpg', 'image/jpeg', 'image/x-dcraw', 'image/x-panasonic-raw', 'image/x-nikon-nef'];
 
-        if(req.files.length >= 30) {
+        if (req.files.length >= 30) {
             req.fileValidationError = 'Too many files';
             cb(null, false);
         }

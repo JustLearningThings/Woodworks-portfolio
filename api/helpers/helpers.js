@@ -135,7 +135,6 @@ const getWork = function(lang, shouldFilter=true, req, res, next) {
         if (work) {
             if(shouldFilter === true) {
                 filterWorkLanguage(work, lang);
-                //work._id = null;
                 work._v = null;
                 work.images.forEach(image => {
                     image._id = null;
@@ -165,10 +164,9 @@ const getWorks = function (lang, shouldFilter=true, req, res, next) {
 
             if (works && works.length > 0) {
                 if(shouldFilter === true) {
-                    // remove unnecessary data when sending data to client
+                    // remove unnecessary fields when sending data to client
                     filterLanguageOfWorks(works, lang);
                     works.forEach(work => {
-                        //work._id = null;
                         work.__v = null;
 
                         work.images.forEach(image => {
@@ -204,7 +202,6 @@ const getWorksOfType = function (lang, type, req, res, next) {
                 // remove unnecessary data when sending data to client
                 filterLanguageOfWorks(works, lang);
                 works.forEach(work => {
-                    //work._id = null;
                     work.__v = null;
 
                     work.images.forEach(image => {
@@ -281,10 +278,8 @@ const updateWork = async function updateWork(req, res, model, next) {
     // {new: true} to get the updated doc in the callback
     let updatedWork = await Works.findByIdAndUpdate(req.params.id, model, { useFindAndModify: false, new: true }).catch(err => next(err));
 
-    if (!req.files || !req.files.length) {
-        res.status(201).json({status: 'success', message: 'work updated', work: updatedWork});
-        return; // unnecessary, perhaps a precaution
-    }
+    if (!req.files || !req.files.length)
+        return res.status(201).json({status: 'success', message: 'work updated', work: updatedWork});
 
     let imagesToAdd = [];
 
@@ -341,12 +336,12 @@ const handleDelete = function handleDelete(req, res, next) {
     Works.findById(req.params.id)
         .populate({path: 'images'})
         .then(foundWork => {
-           if(!foundWork) throw handleError.createError500('work is null or undefined');
+           if(!foundWork) next(handleError.createError500('work is null or undefined'));
 
             let imageIds = [];
             let imagePaths = [];
 
-            if (!imageIds || !(imageIds instanceof Array)) throw handleError.createError500('imgs parameter is not an array');
+            if (!imageIds || !(imageIds instanceof Array)) next(handleError.createError500('imgs parameter is not an array'));
 
             foundWork.images.forEach(image => {
                 imagePaths.push(image.imageURL);
@@ -362,7 +357,7 @@ const handleDelete = function handleDelete(req, res, next) {
                     });
 
                     // delete image files
-                    imagePaths.forEach(path => fs.unlinkSync(path, err => { if(err) throw handleError.createError500('unable to unlink files') }));
+                    imagePaths.forEach(path => fs.unlinkSync(path, err => { if(err) next(handleError.createError500('unable to unlink files')) }));
                 })
                 .catch(err => next(err));
 
